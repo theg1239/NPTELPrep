@@ -4,6 +4,9 @@ import InteractiveQuiz from '@/components/interactive-quiz';
 import { Question as QuizQuestion, QuizType } from '@/types/quiz';
 import { Question as UtilsQuestion, normalizeQuestion } from '@/lib/utils/quizUtils';
 
+// Revalidate every 12 hours to reduce ISR writes
+export const revalidate = 43200;
+
 interface Assignment {
   questions: Array<{
     question_text: string;

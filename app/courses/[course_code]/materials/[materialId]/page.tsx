@@ -3,6 +3,9 @@ import { getCourse, getCourseMaterials } from '@/lib/actions/actions';
 import MaterialViewClient from './material-view-client';
 import Link from 'next/link';
 
+// Revalidate every 24 hours to reduce ISR writes
+export const revalidate = 86400;
+
 export async function generateMetadata(
   { params }: { params: Promise<{ course_code: string; materialId: string }> },
   parent: ResolvingMetadata

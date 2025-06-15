@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { getCourse } from '@/lib/actions/actions';
 import StudyMaterialsClient from './materials-client';
 
+// Revalidate every 24 hours to reduce ISR writes
+export const revalidate = 86400;
+
 export async function generateMetadata(
   {
     params,

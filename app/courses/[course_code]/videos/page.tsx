@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import { getCourse } from '@/lib/actions/actions';
 import VideosClient from './videos-client';
 
+// Revalidate every 24 hours to reduce ISR writes
+export const revalidate = 86400;
+
 export async function generateMetadata({
   params,
 }: {

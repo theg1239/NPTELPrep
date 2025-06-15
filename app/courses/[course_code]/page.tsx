@@ -2,6 +2,9 @@ import QuizPortal from '@/components/quiz-portal';
 import { getCourse, Course } from '@/lib/actions/actions';
 import { Metadata, ResolvingMetadata } from 'next';
 
+// Revalidate every 12 hours to reduce ISR writes
+export const revalidate = 43200;
+
 export async function generateMetadata(
   {
     params,

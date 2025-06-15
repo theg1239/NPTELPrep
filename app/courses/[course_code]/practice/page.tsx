@@ -2,6 +2,9 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { getCourse } from '@/lib/actions/actions';
 import PracticeClient from './practice-client';
 
+// Revalidate every 12 hours to reduce ISR writes
+export const revalidate = 43200;
+
 type Params = { params: Promise<{ course_code: string }> };
 
 export async function generateMetadata(

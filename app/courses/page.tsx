@@ -1,4 +1,5 @@
 import { getAllCourses } from '@/lib/actions/actions';
+import { getCachedCourses } from '@/lib/cache';
 import CourseListClient from './courses-client';
 import { Metadata } from 'next';
 
@@ -25,9 +26,12 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalidate every 6 hours to reduce ISR writes while keeping course list updated
+export const revalidate = 21600;
+
 export default async function CoursesPage() {
   try {
-    const courses = await getAllCourses();
+    const courses = await getCachedCourses();
 
     const sortedCourses = [...courses].sort(
       (a, b) => Number(b.request_count) - Number(a.request_count)

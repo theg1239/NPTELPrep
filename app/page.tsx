@@ -5,6 +5,7 @@ import StatCard from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { getAllCourses, getStats } from '@/lib/actions/actions';
+import { getCachedCourses, getCachedStats } from '@/lib/cache';
 import { Stats } from '@/lib/actions/actions';
 
 interface SearchCourse {
@@ -38,6 +39,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalidate every 24 hours to reduce ISR writes
+export const revalidate = 86400;
+
 const Logo = () => (
   <div className="flex min-h-[100px] items-center justify-center text-4xl font-bold">
     <span>
@@ -61,7 +65,7 @@ export default async function Page() {
   let statsData: Stats = placeholderStats;
 
   try {
-    const [coursesData, fetchedStatsData] = await Promise.all([getAllCourses(), getStats()]);
+    const [coursesData, fetchedStatsData] = await Promise.all([getCachedCourses(), getCachedStats()]);
 
     courses = coursesData.map(course => ({
       course_code: course.course_code,
