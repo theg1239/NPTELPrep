@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center"> 
   <img src="https://github.com/user-attachments/assets/1ce4beee-55f9-4259-866d-972085985d79" alt="NPTELPrep Logo">
 </p>
 
